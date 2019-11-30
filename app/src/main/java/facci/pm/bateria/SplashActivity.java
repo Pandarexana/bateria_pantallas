@@ -1,4 +1,4 @@
-package facci.pm.gestiondefacturas_bateria;
+package facci.pm.bateria;
 
 import android.content.Intent;
 import android.os.Handler;

@@ -1,4 +1,4 @@
-package facci.pm.gestiondefacturas_bateria;
+package facci.pm.bateria;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -32,6 +32,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import static android.Manifest.permission.READ_CONTACTS;
 

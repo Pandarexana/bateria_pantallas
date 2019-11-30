@@ -1,4 +1,4 @@
-package facci.pm.gestiondefacturas_bateria;
+package facci.pm.bateria;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,13 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Log.e("4C", "OnCreate");
-
-        mBatteryLevelText = (TextView) findViewById(R.id.textView);
-        mBatteryLevelProgress = (ProgressBar) findViewById(R.id.progressBar);
-
-
+        mBatteryLevelText = findViewById(R.id.textView);
+        mBatteryLevelProgress = findViewById(R.id.progressBar);
          mReceiver = new BatteryBroadcastReceiver();
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
     }
@@ -41,6 +36,20 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(mReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         Log.e("4C", "OnStart");
+    }
+    private class BatteryBroadcastReceiver extends BroadcastReceiver{
+
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,
+                     0);
+            mBatteryLevelText.setText(
+                    level + ""+ getString(R.string.nivel_de_bateria));
+            mBatteryLevelProgress.setProgress(level);
+
+
+        }
     }
 
     @Override
@@ -82,15 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private class BatteryBroadcastReceiver extends BroadcastReceiver {
 
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
-            mBatteryLevelText.setText( level + " " + getString(R.string.nivel_de_bateria));
-            mBatteryLevelProgress.setProgress(level);
-        }
     }
 
-}
+
